@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    #permet de rediriger la page d'entrée du site vers la page d'accueil de l'appli sondage 
+    path('', RedirectView.as_view(url='/polls/', permanent=True))
+
 ]
+
+
+
+

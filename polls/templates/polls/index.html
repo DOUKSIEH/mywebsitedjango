@@ -1,0 +1,9 @@
+{% if  liste_dernieres_questions  %}
+    <ul>
+    {% for question in liste_dernieres_questions %}
+        <li><a href="{% url 'polls:detail' question.id %}">id : {{ question.id}} , question: {{question.question_text }}  et date de pub: {{ question.pub_date  }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Pas des questions dispo</p>
+{% endif %}

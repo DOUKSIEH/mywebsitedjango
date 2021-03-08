@@ -1,0 +1,9 @@
+<!-- <strong style="color:cadetblue"> {{ req }} </strong>
+
+<p><strong style="color:blue">La question de l'user {{ id }} : </strong><strong style="color:brown">{{ question }}</strong></p> -->
+<h1 style="color:blue">{{ question.question_text }}</h1>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}  </li>
+{% endfor %}
+</ul>
