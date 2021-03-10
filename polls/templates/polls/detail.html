@@ -1,9 +1,17 @@
-<!-- <strong style="color:cadetblue"> {{ req }} </strong>
-
-<p><strong style="color:blue">La question de l'user {{ id }} : </strong><strong style="color:brown">{{ question }}</strong></p> -->
+{% extends 'polls/base.html' %}
+{% block content %}
+         
 <h1 style="color:blue">{{ question.question_text }}</h1>
-<ul>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% else %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }}  </li>
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
-</ul>
+<button class="btn btn-outline-dark px-3 py-2"  type="submit">J'ai voté</button>
+</form>
+{% endif %}
+{% endblock %}

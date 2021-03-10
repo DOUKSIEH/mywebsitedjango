@@ -1,9 +1,46 @@
-{% if  liste_dernieres_questions  %}
-    <ul>
-    {% for question in liste_dernieres_questions %}
-        <li><a href="{% url 'polls:detail' question.id %}">id : {{ question.id}} , question: {{question.question_text }}  et date de pub: {{ question.pub_date  }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Pas des questions dispo</p>
-{% endif %}
+
+{% extends "polls/base.html" %}
+{% block content %}
+    <!-- <div class="jumbotron">
+        <h1 class="display-3">Hello, world!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div> -->
+    {% if  question_list  %}
+        
+        
+            <div class="container mt-5">
+                
+                <div class="row">
+                    {% for question in question_list %}
+                    <div class="col-4">
+                        
+                            <div class="card border-primary mb-3">
+                                
+                                <div class="card-header"><a href="{% url 'polls:detail' question.id %}">id : {{ question.id}} </a></div>
+                                <div class="card-body">
+                                <h4 class="card-title">Question: {{question.question_text }} </h4>
+                                <p class="card-text"> La date de pub: {{ question.pub_date  }}.</p>
+                                </div>
+                            </div>
+                       
+                    </div>
+                    {% endfor %}
+                   
+                 
+                </div>
+                
+                
+            </div>
+           
+        
+           
+       
+    {% else %}
+        <p>Pas des questions dispo</p>
+    {% endif %}
+{% endblock %}
